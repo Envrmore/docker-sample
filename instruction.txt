@@ -1,0 +1,31 @@
+Untuk membuat sebuah kontainer menggunakan image yang sudah dibuat, jalankan :
+docker build -t node-app:1.0 ./
+
+
+#### KETERANGAN ####
+=> `docker build -t` adalah perintah dari docker untuk membuat image.
+=> `node-app` adalah nama dari docker image yang kita buat, isinya bebas.
+=> `:1.0` adalah tag versi. Indikator versi berguna untuk memudahkan manajemen
+dan memonitor perubahan yang dilakukan pada aplikasi (kontainer). Sebaiknya dimulai 
+dari '1' dan ditambahkan seiring adanya perubahan fitur (menambah/mengurangi fitur).
+
+=> `.` atau `./` adalah path dari letak Dockerfile yang telah dibuat, pada kasus ini berarti
+di direktori aktif saat ini. Contohnya, jika seandainya file Dockerfile yang telah kalian buat
+disimpan di direktori /home/namaku/tkj/docker/, maka gantilah `.` atau `./` dengan `/home/namaku/tkj/docker/`.
+
+#### AFTER-BUILD ####
+Jika image sudah selesai dibuat, maka seharusnya akan ada "node-app" ketika kalian menjalankan
+perintah `docker images`. Di dalam Docker Desktop, node-app juga seharusnya muncul di daftar image yang tersedia.
+
+Jalankan image yang telah dibuat dengan :
+docker run -d -p 3000:3000 node-app:1.0
+
+=> `docker run` adalah perintah untuk menjalankan image docker.
+=> `-d` adalah opsi untuk membuat kontainer aktif di latar belakang (background process)
+=> `-p` adalah opsi untuk port binding, sintaks port : (port localhost):(port kontainer).
+Port localhost bebas, namun untuk port kontainer kali ini harus 3000 dikarenakan di dalam
+file server.js sudah secara spesifik ditentukan bahwa aplikasi akan mendengar (listen) di port 3000.
+=> 'node-app:1.0' adalah image dan tag yang kita buat tadi.
+
+Kini, coba buka browser dan masukkan perintah ini untuk mengecek apakah kontainer bekerja :
+localhost:3000
